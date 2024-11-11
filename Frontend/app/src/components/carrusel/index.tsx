@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const images = ["/imagen-1.png", "/imagen-2.jpg", "/imagen-3.jpg"];
 
@@ -17,7 +18,9 @@ export default function HomeCarrousel() {
     const isLastSlide = currentIndex === images.length - 1;
     setCurrentIndex(isLastSlide ? 0 : currentIndex + 1);
   }
-  return (
+
+  const router = useRouter()
+    return (
     <div className="w-full bg-gray-400">
       <div className="w-full h-[600px] relative flex items-center justify-center">
         {images.map((image, idx) => {
@@ -36,9 +39,7 @@ export default function HomeCarrousel() {
         })}
         <div className="flex flex-col items-end w-[1200px] z-10">
           <h2 className="text-5xl font-bold text-white ">15% OFF</h2>
-          <h4 className="text-2xl text-white ">Now in shoes.</h4>
-          <h5 className="text-xl text-white ">All sizes</h5>
-          <button className="w-32 h-10 rounded-md border border-white text-white mt-4 flex items-center justify-center gap-2">
+          <button onClick={() => router.push(`/products`)} className="w-32 h-10 rounded-md border border-white text-white mt-4 flex items-center justify-center gap-2">
             Shop Now <ChevronRight className="w-5 h-5" />
           </button>
         </div>
