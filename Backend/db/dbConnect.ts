@@ -1,0 +1,15 @@
+import mongoose from "mongoose";
+
+
+export default async function dbConnect() {
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+  try {
+    const mongodbUri = process.env.MONGODB_URI ?? "";
+    await mongoose.connect(mongodbUri);
+    console.log("DB Connected");
+  } catch (error) {
+    console.log("DB Connection Error", error);
+  }
+}
